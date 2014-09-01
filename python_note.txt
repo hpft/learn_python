@@ -1,0 +1,255 @@
+source (m.py) --> Byte code(m.pyc) --> Rutime (PVM)
+
+Ctrl + D	to exit from python
+quit()
+
+Using the interactive Prompt
+1. Type Python commands only
+2. print statements are required only in files
+3. Don't indent at the interactive prompt(yet)
+4. Watch out for prompt changes and compound statements.
+
+----------------------------------------------------------------------------------
+#!/usr/bin/python
+print 2 ** 8				# Raise to a power
+print 'the bright side ' + 'of life'	# + means concatenation
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+#!/usr/bin/env python, but does env.
+print 2 ** 8				# Raise to a power
+print 'the bright side ' + 'of life'	# + means concatenation
+----------------------------------------------------------------------------------
+
+on Windows
+----------------------------------------------------------------------------------
+import sys
+print sys.platform
+print 2 ** 100
+raw_input()				# added. prevent popup and exit.
+----------------------------------------------------------------------------------
+
+import a scipt will run it once.
+if you want run it again, you can reload it.
+----------------------------------------------------------------------------------
+>>> import script4
+hello world
+>>> import script4
+>>> import script4
+>>> reload (scritp4)
+hello world
+----------------------------------------------------------------------------------
+
+Module Attributes
+
+myfile.py
+---------------------------------------------------------------------------------
+tile = "The Meaning of Life"
+---------------------------------------------------------------------------------
+
+Test.py
+---------------------------------------------------------------------------------
+import myfile
+print myfile.title
+---------------------------------------------------------------------------------
+or
+---------------------------------------------------------------------------------
+from myfile import title
+print title
+---------------------------------------------------------------------------------
+
+dir(myfile)			# built-in function to fetch a list of names available
+['__builtins__', '__doc__', '__file__', '__name__', '__package__', 'a', 'b', 'c', 'title']
+
+execfile()			# exec a file
+
+
+Chapter 4  Introducing Python Object Types
+==========================================
+Numbers			1234, 3.1415, 999L, 3+4j, Decimal
+Strings			'spam',"guido's"
+Lists			[1, [2, 'three'], 4]
+Dictionaries		{'food': 'spam', 'taste': 'yum'}
+Tuples			(1,'spam', 4, 'U')
+Files			myfile = open('eggs', 'r')
+Other types		Sets, types, None, Booleans
+
+
+
+Numbers:
+	123+222
+	1.5 * 4
+	2 ** 100,000
+	
+	import math
+	math.pi
+	math.sqrt(65)
+
+	import random
+	random.random()
+	random.choice([1,2,3,4])
+
+Strings:
+	S = 'Spam'
+	len(S)
+	S[0]
+	S[1]
+	S[-1]
+	S[-2]
+	S[len(S)-1]
+	S[1:3]
+	S[1:]
+	S[:3]
+	S[:]
+	S + 'xyz'
+	S * 8
+	Immutability
+		S[0]='z'	# ERROR!!!
+		S='z'+S[1:]
+	S.find('pa')
+	S.replace('pa', 'XYZ')
+	line='aaa,bbb,ccccc,dd'
+	line.split(',')
+		['aaa','bbb','ccccc','dd']
+	S.upper()
+		'SPAM'
+	S.isalpha()
+	line='aaa,bbb,ccccc,dd\n'
+	line=line.rstrip()		# Remove whitespace charactors on the right side.
+
+	dir(S)
+		# Get the methods
+
+	Pattern Matching
+		import re
+		match = re.match('Hello[ \t]]*(.*)world', 'Hello	Python world')
+		match.group(1)
+		match.groups()
+
+List:
+	L = [123, 'Spam', 1.23]
+	len(L)
+	L(0)
+	L[:-1]
+	L + [4, 5, 6]
+	L
+	L.append('NI')
+	L.pop(2)	# Delete an item in the middle
+	
+	M = ['bb', 'aa', 'cc']
+	M.sort()
+	M.reverse()	# 反序
+
+	M = [[1, 2, 3],
+	     [4, 5, 6],
+	     [7, 8, 9]]
+	M[1][2]
+
+	col2=[row[1] for row in M]
+	[row[1] for row in M if row[1] % 2 ==0]
+	diag=[M[i][i] for i in [0,1,2]]
+	doubles=[c*2 for c in 'spam']
+
+Dictionaries:
+	D = {'food': 'Spam', 'Quantity': 4, 'color': 'pink'}
+	D['quantity'] += 1
+
+	D={}
+	D['name'] = 'Bob'
+	D['job'] = 'dev'
+	D['age'] = 40
+	D
+
+	Nesting Revisited
+		rec = {'name'" {'first': 'Bob', 'last': 'Smith'},
+			'job': ['dev', 'mgr'],
+			'age': 40.5}
+		rec['job'].append('jnaitor')
+		rec
+
+		rec = 0		# Now the object's space is reclaimed.
+				# Release the memory space
+
+	D = {'a': 1, 'b': 2, 'c': 3}
+	for key in sorted(D):
+		print key, '=>', D[key]
+	
+
+	for c in 'spam':
+		print c.upper()
+
+	squares = [x ** 2 for x in [1, 2, 3, 4, 5]]
+	squares
+
+	squares = []
+	for x in [1, 2, 3, 4, 5]:
+		squares.append(x ** 2)
+
+	Missing Keys: if Tests
+		D.has_key('f')
+		if not D.has_key('f'):
+		    print 'missing'
+
+Tuples:
+	T = (1, 2, 3, 4)
+	len(T)
+	T + (5, 6)
+
+	T[0] = 2		# ERROR!!!!!!!!!
+				# Tuples are immutable
+
+
+Files:
+	f = open('data.txt', 'w')
+	f.write('Hello\n')
+	f.write('world\n')
+	f.close()
+	
+	f.read()
+	f.seek(0)
+		# Always use help to find how to use it!
+
+Other Core Types:
+	Set:(集合)
+		X = set('spam')
+		Y = set(['h', 'a', 'm'])
+		X, Y
+			(set(['a', 'p', 's', 'm'), set(['a', 'h', 'm']))
+
+		X & Y
+		X | Y
+		X - Y
+
+	decimal num:
+		import decimal
+		d = decimal.Decimal('3.141')
+		d + 1
+
+	booleans:
+		1 > 2, 1 < 2
+		bool('spam')
+
+	None:
+		X = None
+		print X
+		L = [None] * 100
+		L
+
+	Type:
+		type(L)
+		type(type(L))
+
+		if type(L) == type([]):
+			print 'yes'
+
+		if type(L) == list:
+			print 'yes'
+
+		if isinstance(L, list):
+			print 'yes'
+
+
+
+Immutability
+Sequences
+Polymorphism //多态
